@@ -1,0 +1,11 @@
+## Interface: 40000
+## Title: LinkHover
+## Author: Adys
+## Version: 1.2
+## Notes: Show tooltips when hovering a link in chat
+## eMail: adys.wh+linkhover@gmail.com
+## URL: http://db.mmo-champion.com
+## LoadOnDemand: 0
+## DefaultState: enabled
+
+LinkHover.lua
