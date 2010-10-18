@@ -20,8 +20,7 @@ LinkHover.show = {
 }
 
 function LinkHover:OnHyperlinkEnter(frame, linkData, link)
-	local t = linkData:match("^(.-):")
-	if self.show[t] then
+	if self.show[linkData:match("^(.-):")] then
 		ShowUIPanel(GameTooltip)
 		GameTooltip:SetOwner(UIParent, "ANCHOR_CURSOR")
 		GameTooltip:SetHyperlink(link)
@@ -30,8 +29,7 @@ function LinkHover:OnHyperlinkEnter(frame, linkData, link)
 end
 
 function LinkHover:OnHyperlinkLeave(frame, linkData, link)
-	local t = linkData:match("^(.-):")
-	if self.show[t] then
+	if self.show[linkData:match("^(.-):")] then
 		HideUIPanel(GameTooltip)
 	end
 end
@@ -42,18 +40,20 @@ function LinkHover:registerFrame(frame)
 end
 
 function LinkHover:init()
-	local i
 	self.eventframe = CreateFrame("Frame")
 	self.eventframe:RegisterEvent("GUILDBANKFRAME_OPENED")
 	self.eventframe:SetScript("OnEvent",
 		function(...)
 			self:registerFrame(GuildBankMessageFrame)
 			self.eventframe:UnregisterEvent("GUILDBANKFRAME_OPENED")
+			self.registerFrame = nil
 		end
 	)
+	local i
 	for i = 1, NUM_CHAT_WINDOWS do
 		self:registerFrame(_G["ChatFrame"..i])
 	end
 end
 
 LinkHover:init()
+LinkHover.init = nil
