@@ -36,12 +36,23 @@ function LinkHover:OnHyperlinkLeave(frame, linkData, link)
 	end
 end
 
+function LinkHover:registerFrame(frame)
+	frame:SetScript("OnHyperlinkEnter", function(...) self:OnHyperlinkEnter(...) end)
+	frame:SetScript("OnHyperlinkLeave", function(...) self:OnHyperlinkLeave(...) end)
+end
+
 function LinkHover:init()
 	local i
+	self.eventframe = CreateFrame("Frame")
+	self.eventframe:RegisterEvent("GUILDBANKFRAME_OPENED")
+	self.eventframe:SetScript("OnEvent",
+		function(...)
+			self:registerFrame(GuildBankMessageFrame)
+			self.eventframe:UnregisterEvent("GUILDBANKFRAME_OPENED")
+		end
+	)
 	for i = 1, NUM_CHAT_WINDOWS do
-		local frame = _G["ChatFrame"..i]
-		frame:SetScript("OnHyperlinkEnter", function(...) self:OnHyperlinkEnter(...) end)
-		frame:SetScript("OnHyperlinkLeave", function(...) self:OnHyperlinkLeave(...) end)
+		self:registerFrame(_G["ChatFrame"..i])
 	end
 end
 
