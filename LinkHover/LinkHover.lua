@@ -8,15 +8,15 @@
 local _, LinkHover = ...
 
 LinkHover.show = {
-	["achievement"]  = true,
-	["enchant"]      = true,
-	["glyph"]        = true,
-	["item"]         = true,
-	["instancelock"] = true,
-	["quest"]        = true,
-	["spell"]        = true,
-	["talent"]       = true,
-	["unit"]         = true,
+	achievement  = true,
+	enchant      = true,
+	glyph        = true,
+	item         = true,
+	instancelock = true,
+	quest        = true,
+	spell        = true,
+	talent       = true,
+	unit         = true,
 }
 
 function LinkHover:OnHyperlinkEnter(frame, linkData, link)
@@ -30,7 +30,7 @@ end
 
 function LinkHover:OnHyperlinkLeave(frame, linkData, link)
 	if self.show[linkData:match("^(.-):")] then
-		HideUIPanel(GameTooltip)
+		GameTooltip:Hide()
 	end
 end
 
