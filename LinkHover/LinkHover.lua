@@ -44,9 +44,11 @@ function LinkHover:init()
 	self.eventframe:RegisterEvent("GUILDBANKFRAME_OPENED")
 	self.eventframe:SetScript("OnEvent",
 		function(...)
-			self:registerFrame(GuildBankMessageFrame)
-			self.eventframe:UnregisterEvent("GUILDBANKFRAME_OPENED")
-			self.registerFrame = nil
+			if GuildBankMessageFrame then -- Check for addons that replace the guildbank frame
+				self:registerFrame(GuildBankMessageFrame)
+				self.eventframe:UnregisterEvent("GUILDBANKFRAME_OPENED")
+				self.registerFrame = nil
+			end
 		end
 	)
 	local i
