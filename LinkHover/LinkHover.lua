@@ -9,6 +9,7 @@ local _, LinkHover = ...
 
 LinkHover.show = {
 	achievement  = true,
+	currency     = true,
 	enchant      = true,
 	glyph        = true,
 	item         = true,
