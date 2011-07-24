@@ -1,9 +1,9 @@
-## Interface: 40100
+## Interface: 40200
 ## Title: LinkHover
 ## Author: Adys
-## Version: 1.3
+## Version: 1.4
 ## Notes: Show tooltips when hovering a link in chat
-## eMail: adys.wh.com
+## eMail: adys.wh@gmail.com
 ## LoadOnDemand: 0
 ## DefaultState: enabled
 
