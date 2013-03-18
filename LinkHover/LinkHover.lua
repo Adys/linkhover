@@ -8,30 +8,56 @@
 local _, LinkHover = ...
 
 LinkHover.show = {
-	achievement  = true,
-	currency     = true,
-	enchant      = true,
-	glyph        = true,
-	item         = true,
-	instancelock = true,
-	quest        = true,
-	spell        = true,
-	talent       = true,
-	unit         = true,
+	achievement    = GameTooltip,
+	battlepet      = BattlePetTooltip,
+	battlePetAbil  = SharedPetBattleAbilityTooltip,
+	currency       = GameTooltip,
+	enchant        = GameTooltip,
+	glyph          = GameTooltip,
+	item           = GameTooltip,
+	instancelock   = GameTooltip,
+	quest          = GameTooltip,
+	spell          = GameTooltip,
+	talent         = GameTooltip,
+	unit           = GameTooltip,
 }
 
+local function tonumber_all(v, ...)
+	if select('#', ...) == 0 then
+		return tonumber(v)
+	else
+		return tonumber(v), tonumber_all(...)
+	end
+end
+
 function LinkHover:OnHyperlinkEnter(frame, linkData, link)
-	if self.show[linkData:match("^(.-):")] then
-		ShowUIPanel(GameTooltip)
-		GameTooltip:SetOwner(UIParent, "ANCHOR_CURSOR")
-		GameTooltip:SetHyperlink(link)
-		GameTooltip:Show()
+	local tt = self.show[linkData:match("^(.-):")]
+	if tt then
+		if tt == BattlePetTooltip then
+			local x, y = GetCursorPosition()
+			local scale = UIParent:GetEffectiveScale()
+			x = x / scale
+			y = y / scale
+			GameTooltip:SetOwner(UIParent, "ANCHOR_NONE")
+			GameTooltip:SetPoint(
+				"BOTTOMLEFT", UIParent, "BOTTOMLEFT", x - GameTooltip:GetWidth() / 2, y
+			)
+			BattlePetToolTip_Show(tonumber_all(select(2, strsplit(":", linkData))))
+		elseif tt == SharedPetBattleAbilityTooltip then
+			-- TODO: Get someone fired
+		else
+			ShowUIPanel(tt)
+			tt:SetOwner(UIParent, "ANCHOR_CURSOR")
+			tt:SetHyperlink(link)
+			tt:Show()
+		end
 	end
 end
 
 function LinkHover:OnHyperlinkLeave(frame, linkData, link)
-	if self.show[linkData:match("^(.-):")] then
-		GameTooltip:Hide()
+	local tt = self.show[linkData:match("^(.-):")]
+	if tt then
+		tt:Hide()
 	end
 end
 
