@@ -1,9 +1,9 @@
-## Interface: 50200
+## Interface: 50400
 ## Title: LinkHover
 ## Author: Adys
-## Version: 1.6
+## Version: 1.6.1
 ## Notes: Show tooltips when hovering a link in chat
-## eMail: jerome.leclanche+linkhover@gmail.com
+## eMail: jerome@leclan.ch
 ## LoadOnDemand: 0
 ## DefaultState: enabled
 

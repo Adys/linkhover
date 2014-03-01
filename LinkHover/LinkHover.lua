@@ -2,7 +2,7 @@
 -- LinkHover --
 ---------------
 -- Show tooltips when hovering all kind of links in chat.
--- By Jerome Leclanche <jerome.leclanche+linkhover@gmail.com>
+-- Written by Jerome Leclanche <jerome@leclan.ch>
 -- LinkHover is hereby placed in the Public Domain.
 
 local _, LinkHover = ...
