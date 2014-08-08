@@ -31,6 +31,8 @@ local function tonumber_all(v, ...)
 end
 
 function LinkHover:OnHyperlinkEnter(frame, linkData, link)
+	-- Some links are buggy. (eg. Omnitron warnings in BWD)
+	if not link or link == "" then return end
 	local tt = self.show[linkData:match("^(.-):")]
 	if tt then
 		if tt == BattlePetTooltip then
